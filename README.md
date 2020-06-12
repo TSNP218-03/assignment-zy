@@ -18,19 +18,19 @@ https://dingyuliang.me/redis-3-2-install-redis-windows/
 comamnd to run:    
 node backend.js    
 
-Because SocketIO is based on JS, we found our there is a ported SocketIO library for .NET (VB, C#, C++) here    
+Because SocketIO is based on JS, we found online there is a ported SocketIO library for .NET (VB, C#, C++) here    
 https://github.com/HavenDV/H.Socket.IO    
 
-JSON Library for .Net  
+JSON Library for .NET    
 https://github.com/JamesNK/Newtonsoft.Json  
 
-MQTT  
-http://TO BE FOUND/  
+MQTT Lirary for .NET  
+https://github.com/chkr1011/MQTTnet
 
 Above library can be insalled in Visual Studio using Nuget Package Manager    
 https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio    
 
 
-Result of runnning the skeleton code using VB with H.Socket.IO library.  
+Result of runnning the skeleton code using VB with H.Socket.IO library. Refer Module1.vb for more info.  
 ![Skeleton](/skeleton.png)  
 
