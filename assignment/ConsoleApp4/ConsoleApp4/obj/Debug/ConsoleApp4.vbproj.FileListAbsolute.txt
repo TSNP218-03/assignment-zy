@@ -1,0 +1,11 @@
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe.config
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.exe
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.pdb
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\bin\Debug\ConsoleApp4.xml
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.vbprojAssemblyReference.cache
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.Resources.resources
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.vbproj.GenerateResource.cache
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.vbproj.CoreCompileInputs.cache
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.exe
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.xml
+C:\Users\Lee Zhen Yu\source\repos\ConsoleApp4\ConsoleApp4\obj\Debug\ConsoleApp4.pdb
