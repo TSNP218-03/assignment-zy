@@ -1,13 +1,24 @@
-﻿Imports System.Net.Sockets
+﻿'Changelog:
+'#Issue4 : Migrate to socket.io
+'Install H.Socket.Io by going to solution explorer, right click References, then manage NuGet Packages.
+
+Imports System.Net.Sockets
 Imports System.Text
+
+Imports H.Socket.IO
 
 Module Module1
 
-    Dim host As String = "127.0.0.1"
-    Dim port As Integer = 9000
-    Dim client As TcpClient
+    'Dim host As String = "127.0.0.1"
+    'Dim port As Integer = 9000
+    'Dim client As TcpClient
+
+    Dim client As SocketIoClient = New SocketIoClient()
 
     Sub Main()
+
+
+        client.ConnectAsync(New Uri("http://127.0.0.1:55555"))
 
         Console.Clear()
 
@@ -38,27 +49,27 @@ Module Module1
 
     End Sub
     Sub openConnection()
-        If client IsNot Nothing Then
-            Console.WriteLine("Connection is already open")
-        Else
-            Try
-                client = New TcpClient
-                client.Connect(host, port)
-                Console.WriteLine("connection been establish")
-            Catch ex As Exception
+        'If client IsNot Nothing Then
+        '    Console.WriteLine("Connection is already open")
+        'Else
+        '    Try
+        '        client = New TcpClient
+        '        client.Connect(host, port)
+        '        Console.WriteLine("connection been establish")
+        '    Catch ex As Exception
 
-            End Try
+        '    End Try
 
-        End If
+        'End If
     End Sub
     Sub sendData()
-        Dim data As Double
+        'Dim data As Double
         Dim random As New Random
         Dim temp As Double
         Dim tempSTR As String
         Dim result As Integer = 1
-        Dim nwStream As NetworkStream = client.GetStream()
-        Dim nwstream2 As NetworkStream = client.GetStream()
+        'Dim nwStream As NetworkStream = client.GetStream()
+        'Dim nwstream2 As NetworkStream = client.GetStream()
         Dim name As String
         Dim name2 As String
 
@@ -70,16 +81,16 @@ Module Module1
         Console.WriteLine("Enter second patient name:")
         name2 = Console.ReadLine()
 
-        Dim nametoSend As Byte() = ASCIIEncoding.ASCII.GetBytes(name)
-        nwstream2.Write(nametoSend, 0, nametoSend.Length)
+        'Dim nametoSend As Byte() = ASCIIEncoding.ASCII.GetBytes(name)
+        'nwstream2.Write(nametoSend, 0, nametoSend.Length)
 
 
         'loop when the result is less than ten
         Do
             'when 10 result send out already send another patient temperature 
             If (result > 10 And sendAlready = False) Then
-                nametoSend = ASCIIEncoding.ASCII.GetBytes(name2)
-                nwstream2.Write(nametoSend, 0, nametoSend.Length)
+                'nametoSend = ASCIIEncoding.ASCII.GetBytes(name2)
+                ' nwstream2.Write(nametoSend, 0, nametoSend.Length)
                 sendAlready = True
             End If
 
@@ -89,13 +100,14 @@ Module Module1
             tempSTR = CStr(temp)
             Console.WriteLine("temperature is:" + tempSTR)
 
+            client.Emit("data", tempSTR)
 
             'set the temp to data 
-            data = temp
+            'data = temp
 
             'send data
-            Dim bytetoSend As Byte() = ASCIIEncoding.ASCII.GetBytes(data)
-            nwStream.Write(bytetoSend, 0, bytetoSend.Length)
+            'Dim bytetoSend As Byte() = ASCIIEncoding.ASCII.GetBytes(data)
+            ' nwStream.Write(bytetoSend, 0, bytetoSend.Length)
 
             'wait for one second 
             Threading.Thread.Sleep(1000)
@@ -110,13 +122,13 @@ Module Module1
     End Sub
 
     Sub closeConnection()
-        If client IsNot Nothing Then
-            client.Close()
-            Console.WriteLine("connection been close")
-        Else
-            Console.WriteLine("client already close ")
+        'If client IsNot Nothing Then
+        '    client.Close()
+        '    Console.WriteLine("connection been close")
+        'Else
+        '    Console.WriteLine("client already close ")
 
-        End If
+        'End If
     End Sub
 
 End Module
