@@ -2,9 +2,13 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/slnx.sqlite
 
-#Add two more exclusions
+#Adding more exclusions
+
 *.sqlite
 *.json
 *.suo
+bin
+obj
+config
+
