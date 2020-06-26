@@ -1,8 +1,14 @@
 
+//Changelog: 25 June 2020 11PM
+//#Issue2 : Using JSON 
+//Removed some unused code (previously commmented in branch issue#4)
+//
+
 //Changelog:
 //#Issue4 : Migrate to socket.io
 //npm install express
 //npm install socket.io
+
 
 
 //var net = require("net");
