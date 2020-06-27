@@ -1,4 +1,8 @@
 ﻿
+'Changelog 27 June 2020
+'Code cleaning, removed commented code block
+'Added some comments
+
 'Changelog 26 June 2020
 '#Issue8: Reusing ONE random generator code for more than one patient (output)
 'Added For loop on asking how patient to monitor
@@ -13,7 +17,6 @@
 '#Issue2&3 : Using JSON, and parsing JSON with Socket.IO
 'Removed some unused code (previously commmented in branch issue#4)
 'Install Newtonsoft.Json Library using NuGet Package Manager
-
 
 'Changelog: 25 JUNE 2020 12PM
 '#Issue4 : Migrate to socket.io
@@ -32,16 +35,12 @@ Module Module1
 
     Sub Main()
 
-
         client.ConnectAsync(New Uri("http://127.0.0.1:55555"))
         sensorNode()
-
-
 
     End Sub
 
     Public Class PatientClass                                              'JSON Classs
-
 
         Public Name As String
         Public BodyTemperature As String
@@ -50,6 +49,10 @@ Module Module1
 
     End Class
 
+
+    'Reusing zhen yu code here, but currently only have one type of generator, 
+    'that Is body temperature. \HeartRate & BloodPressure will reuse this RandomGenerator for testing phase
+    'If you want to have more relistic data for HeartRate and BloodPressure, feel free to create one/two more function here. And call in JSON code block
     Function RandomGenerator() As String
 
         Dim temp As Double
@@ -69,6 +72,7 @@ Module Module1
 
     Sub sensorNode()  'previosuly known as sendData()
 
+        'Get number of patient to monitor
         Dim num As Integer
         Console.WriteLine("Enter the number of patient u would to monitor:")                           'ask for patient name
         num = Console.ReadLine()
@@ -84,26 +88,10 @@ Module Module1
 
         Next index
 
-
-
-        ''Keeeping until next pull request```
-
-        'Dim name As String                                                        'init
-        '    Dim name2 As String
-        'Dim name3 As String
-
-        'Console.WriteLine("Enter first patient name:")                           'ask for patient name
-        'name = Console.ReadLine()
-
-        'Console.WriteLine("Enter 2nd patient name:")
-        'name2 = Console.ReadLine()
-
-        'Console.WriteLine("Enter 3rd patient name:")
-        'name3 = Console.ReadLine()
-
+        'JSON
         Dim count2 As Integer = 0
 
-        While True
+        While True                                                    'Loop
 
             'Add JSON objects(see PatientClass above) to a list and then serialize the list:
             'refer:  https://stackoverflow.com/questions/27153105/adding-multiple-objects-to-the-same-json-string
@@ -128,34 +116,6 @@ Module Module1
                 End If
 
             Next
-
-
-
-            ''Keeeping until next pull request```
-
-            ''1st patient data
-            'p = New PatientClass()                               'JSON Serialize the List
-            'p.Name = array(0)
-            'p.BodyTemperature = RandomGenerator()
-            'p.HeartRate = RandomGenerator()
-            'p.BloodPressure = RandomGenerator()
-            'patient.Add(p)
-
-            ''2nd patient data
-            'p = New PatientClass()
-            'p.Name = array(1)
-            'p.BodyTemperature = RandomGenerator()
-            'p.HeartRate = RandomGenerator()
-            'p.BloodPressure = RandomGenerator()
-            'patient.Add(p)
-
-            ''3rd patient data
-            'p = New PatientClass()
-            'p.Name = array(2)
-            'p.BodyTemperature = RandomGenerator()
-            'p.HeartRate = RandomGenerator()
-            'p.BloodPressure = RandomGenerator()
-            'patient.Add(p)
 
 
             'Note: socket.io emit function do not support JSON type that has STRING for the key {"": ""}:
