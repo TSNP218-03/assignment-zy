@@ -7,7 +7,7 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 # Current progess:
 
 | Part | Task | Remark |
-| --- | --- |
+| --- | --- | --- |
 | SensorNode (VB.Net)|  Migrate from NetworkStream to Socket.IO | Done
 | | Random(), BodyTemperature, HeartRate, BloodPressure | Done
 | | Use JSON to combine Ramdom data & patientName and sent via Socket.IO | Done
