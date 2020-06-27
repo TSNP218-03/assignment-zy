@@ -1,0 +1,62 @@
+﻿<!--	Changelog: 27 June 2020
+ [] Issue#7, using html/javascript/jquery in dashboard
+ [] Using for loop for dynamic code, so it would print out all the possible patient from gateway.
+ [] Calling API route /data to receive the JSON
+ [] TODO: Drop down menu to select which patient to show. Currently only able to show 1 patient in the dashboard.
+ [] Console.log however can show every patient sent from gateway 
+ [] TODO: UI for dashbaord	-->
+
+<body>
+	<p>Patient Name: <span id="Name"></span></p>
+	<p>Patient Body Temperature: <span id="BodyTemperature"></span></p>
+	<p>Patient Heart Rate: <span id="HeartRate"></span></p>
+	<p>Patient Blood Pressure: <span id="BloodPressure"></span></p>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script>
+
+		//Global init
+		var Name;
+		var BodyTemperature;
+		var HeartRate;
+		var BloodPressure;
+
+
+
+		$(document).ready(function () {
+			setInterval(fetchData, 3000);	   					//loop in 3second to get new data
+		});
+
+		function fetchData() {
+			$.getJSON('/data', function (data) {
+
+
+				for (var i = 0; i < data.length; i++) {
+					console.log(data[i].Name);						//[0] is the 1st patient, [1]=2nd, and so on
+					console.log(data[i].BodyTemperature);
+					console.log(data[i].HeartRate);
+					console.log(data[i].BloodPressure);
+				}
+
+
+				//console.log(data[0].Name);						//[0] is the 1st patient, [1]=2nd, and so on
+				//console.log(data[0].BodyTemperature);
+				//console.log(data[0].HeartRate);
+				//console.log(data[0].BloodPressure);
+
+				Name = data[0].Name
+				BodyTemperature = data[0].BodyTemperature
+				HeartRate = data[0].HeartRate
+				BloodPressure = data[0].BloodPressure
+
+				document.getElementById("Name").textContent = Name;
+				document.getElementById("BodyTemperature").textContent = BodyTemperature;
+				document.getElementById("HeartRate").textContent = HeartRate;
+				document.getElementById("BloodPressure").textContent = BloodPressure;
+
+			}); //end of $.getJSON()
+		}//end of fetchdata()
+
+
+
+	</script>
+</body>

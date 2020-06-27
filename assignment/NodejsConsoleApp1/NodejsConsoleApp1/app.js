@@ -1,8 +1,15 @@
+//Changelog: 27 June 2020
+// [] Issue#7, redis, express route
+// [] Added redis for DB
+// [] npm install redis
+// [] Express route for API
+// [] Route '/' for homepage, include index.html
+// [] Route '/data' for sending JSON to dashboard
+
 
 //Changelog: 25 June 2020 11PM
 //#Issue2 : Using JSON 
 //Removed some unused code (previously commmented in branch issue#4)
-//
 
 //Changelog:
 //#Issue4 : Migrate to socket.io
@@ -11,66 +18,88 @@
 
 
 
-//var net = require("net");
-
-//var server = net.createServer();
-
+// init
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var redis = require('redis');			// redis init
+var client = redis.createClient();
+const path = require('path'); //require path module for express route
 
-//server.on("connection", function (socket) {
+// error handling
+client.on("error", function (err) {
+	console.log("Err: " + err);
+});
 
-   // var remoteAddress = socket.remoteAddress + ":" + socket.remotePort;
-    //console.log("new client connection is made %s", remoteAddress);
-    //var oriName=null
-
-
+//server listening
 var port = 55555;
 http.listen(port, function () {
-    console.log("listening at *:" + port);
+	console.log("listening at *:" + port);
 });
 
+//Global var
+var n2;
+var n3;
+
+//Home Route
+app.get('/', (request, response) => {
+	//response.send("this is home location");
+	response.sendFile(path.join(__dirname + '/index.html'));
+});
+
+//while connected to client,
 io.on('connection', function (socket) {
-    
-   
-    //receive data
-    socket.on("data", function (d) {
-        //if the buffer is number
-        //if (parseInt(d) == 37 || parseInt(d) == 38 || parseInt(d) == 39 || parseInt(d) == 40) {
+	console.log('debug: Connected! ID: ' + socket.id);
 
-        //    console.log("Temperature is: %s", d);
+	//get data from sensorNode (.vb)
+	socket.on('data', function (n) {
+		// console.log(n[0].Name)		//1st patient
+		// console.log(n[1].Name)		//2nd patient
+		// console.log(n[2].Name)		//3rd patient
 
-        //}
+		// console.log(n[0].BodyTemperature)
+		// console.log(n[0].HeartRate)
+		// console.log(n[0].BloodPressure)
 
-        //else {
-        //    //if the buffer is name
-        //    var newName = d.toString()
+		// console.log(n[1].BodyTemperature)
+		// console.log(n[1].HeartRate)
+		// console.log(n[1].BloodPressure)
 
-        //    //check when the name is diffeent print one more time 
-        //    if (oriName != newName) {
-        //        console.log("Name is :%s", newName)
-        //    }
-            
-        //    oriName=newName
-        //}
+		// console.log(n[2].BodyTemperature)
+		// console.log(n[2].HeartRate)
+		// console.log(n[2].BloodPressure)
 
-        console.log(d)
-           
-    });
+		n2 = JSON.stringify(n)			//Convert the object into a string
+		//console.log(n2);
+		client.set('redis', n2);		//Save JSON in Redis for cache purpose  
+
+		client.get('redis', function (err, reply) {		//get the JSON from Redis	
+			console.log("<redis reply>:" + reply);
+			n3 = reply
+
+			//console.log(reply[0].BodyTemperature)
+			//console.log(reply[0].HeartRate)
+			//console.log(reply[0].BloodPressure)
+		});
+	});
 
 
-    socket.on("disconnect", function () {
-        console.log("connection from %s closed", socket.id);
-        //remoteAddress=null
-    });
 
-    socket.on("error", function (err) {
-        console.log("connection %s error: %s", socket.id,err.message);
-    });
+	//A Simple API Route, send JSON to realtime dashboard (.html)
+	app.get('/data', (request, response) => {
+		response.send(n3);		//send JSON from Redis over API route
+		//response.json(n2)  
+	});
 
-});
+	//client disconnection 
+	socket.on('disconnect', function () {
+		console.log("debug: Disconnected! ID: " + socket.id);
+	});
 
-//server.listen(55555, function () {
-//    console.log("server listening to %j", server.address());
-//});
+	// exit signal call
+	process.on('SIGINT', function () {
+		console.log("seed program exits!");
+		process.exit();
+	});
+
+});//closing of io.on ('connection')
