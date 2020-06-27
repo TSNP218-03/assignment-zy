@@ -1,36 +1,75 @@
-Above are just the skeleton of our assignment, the base code is based on the previous Guess Game assignment in Distributed System Course. Seed mtching, and score update, etc is removed for code simpiicty.   
-
-We will be having three parts:-  
-1. backened.js(backend) will be based on Nodejs + redis   
-2. Module1.vb (frontend) will be based on VB.net  
-3. API (TO BE DONE)  
-
-Steps:   
-
-1. Download nodejs, extract, install the following:  
-npm install redis   
-npm install socket.io   
-npm install express  
-
-2. Download redis 3.2.100   
-https://dingyuliang.me/redis-3-2-install-redis-windows/    
-
-comamnd to run:    
-node backend.js    
-
-Because SocketIO is based on JS, we found online there is a ported SocketIO library for .NET (VB, C#, C++) here    
-https://github.com/HavenDV/H.Socket.IO    
-
-JSON Library for .NET    
-https://github.com/JamesNK/Newtonsoft.Json  
-
-MQTT Lirary for .NET  
-https://github.com/chkr1011/MQTTnet
-
-Above library can be insalled in Visual Studio using Nuget Package Manager    
-https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio    
+# High Level Architcture
+![Architecture](https://user-images.githubusercontent.com/9402322/85918256-a4095600-b893-11ea-9b4f-4b71efda56aa.png)  
+Image above adapted and edited from [online](https://kasvith.me/posts/how-we-created-a-realtime-patient-monitoring-system-with-go-and-vue/)  
 
 
-Result of runnning the skeleton code using VB with H.Socket.IO library. Refer Module1.vb for more info.  
-![Skeleton](/skeleton.png)  
 
+# Current progess:
+
+| Part | Task | Remark |
+| --- | --- |
+| SensorNode (VB.Net)|  Migrate from NetworkStream to Socket.IO | Done
+| | Random(), BodyTemperature, HeartRate, BloodPressure | Done
+| | Use JSON to combine Ramdom data & patientName and sent via Socket.IO | Done
+| | Accept unlimited* patient monitoring using ForLoop & Array (Dynamic coding)| Done
+| Gateway (Node.js) | Retrive data using Socket.IO  | Done
+| | Implement API using Express.js Route ( app.get '/' )| Done
+| | Implement Database using Redis to store patient information in JSON  | Done
+| Frontend (html/javascript) | Simple realtime monitoring using console.log  | Done
+| | Retrive Webpage, JSON from API route '/' | Done
+| | Realtime graph | In progress  
+
+
+
+# Steps to run the program:
+
+1. Clone our program from github (master branch)
+
+2.  Run [redis-server.exe ](https://dingyuliang.me/redis-3-2-install-redis-windows/)   
+
+3.  Run app.js  
+    *In case nodejs complaining some modules not found:-  
+    npm install redis   
+    npm install socket.io   
+    npm install express          
+    
+4.  Run Module1.vb, now the app.js will show client is connected  
+    *In case vb complaining some variable is not defined, install package(s) below using [NugetPackageManager](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio)  
+    [H.Socket.IO](https://github.com/HavenDV/H.Socket.IO)  
+    [Json.NET]( https://www.newtonsoft.com/json)  
+
+   
+5.  Now proceed to send data with sensorNode (insert number of patient to be monitored)
+
+6.  Open any browser, type http://127.0.0.1:55555/ (lima 5)
+
+7.  You should be able to see a webpage  
+    Press F12, Select console tab, to view the patient data in real time  
+    Browse http://127.0.0.1:55555/data (lima 5) view the API return value, that is JSON
+
+8.  That's it.
+
+
+# Screenshot(s) of the program:
+
+![image](https://user-images.githubusercontent.com/9402322/85916606-f5f6af80-b884-11ea-9cfc-9833ad34165d.png)  
+Left : Gateway (Node.js)  
+Right : SensorNode (VB.Net)
+
+Program will ask user to enter the number of patient to be monitored.  
+After getting the numbers, program will then ask names for each patient  
+Then only will initate Random() to send the patient infromation 
+
+![image](https://user-images.githubusercontent.com/9402322/85916610-fa22cd00-b884-11ea-8cb0-456065700687.png)  
+
+Above : Frontend realtime dashboard   
+Bottom : API (Express route) 
+
+The dashboard will access the JSON (patient information) via API '/data'  
+
+# Acknowledgement
+
+LEE ZHEN YU   (Team Lead)  
+TAN KHIM HUANG   
+TEH ZHEE KIAN  
+Muhammad Norhadri Md Hilmi (Lecturer)
