@@ -53,33 +53,17 @@ io.on('connection', function (socket) {
 
 	//get data from sensorNode (.vb)
 	socket.on('data', function (n) {
-		// console.log(n[0].Name)		//1st patient
-		// console.log(n[1].Name)		//2nd patient
-		// console.log(n[2].Name)		//3rd patient
-
-		// console.log(n[0].BodyTemperature)
-		// console.log(n[0].HeartRate)
-		// console.log(n[0].BloodPressure)
-
-		// console.log(n[1].BodyTemperature)
-		// console.log(n[1].HeartRate)
-		// console.log(n[1].BloodPressure)
-
-		// console.log(n[2].BodyTemperature)
-		// console.log(n[2].HeartRate)
-		// console.log(n[2].BloodPressure)
+		
 
 		n2 = JSON.stringify(n)			//Convert the object into a string
-		//console.log(n2);
+		
 		client.set('redis', n2);		//Save JSON in Redis for cache purpose  
 
 		client.get('redis', function (err, reply) {		//get the JSON from Redis	
 			console.log("<redis reply>:" + reply);
 			n3 = reply
 
-			//console.log(reply[0].BodyTemperature)
-			//console.log(reply[0].HeartRate)
-			//console.log(reply[0].BloodPressure)
+			
 		});
 	});
 
@@ -88,7 +72,7 @@ io.on('connection', function (socket) {
 	//A Simple API Route, send JSON to realtime dashboard (.html)
 	app.get('/data', (request, response) => {
 		response.send(n3);		//send JSON from Redis over API route
-		//response.json(n2)  
+		
 	});
 
 	//client disconnection 
