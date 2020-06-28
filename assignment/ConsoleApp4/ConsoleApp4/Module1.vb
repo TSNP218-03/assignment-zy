@@ -1,4 +1,9 @@
 ﻿
+'Changelog 28 June 2020
+'Remove blood presure 
+'Remove some comment 
+'Add more realistic heart rate generator 
+
 'Changelog 27 June 2020
 'Code cleaning, removed commented code block
 'Added some comments
@@ -45,14 +50,14 @@ Module Module1
         Public Name As String
         Public BodyTemperature As String
         Public HeartRate As String
-        Public BloodPressure As String
+
 
     End Class
 
 
-    'Reusing zhen yu code here, but currently only have one type of generator, 
-    'that Is body temperature. \HeartRate & BloodPressure will reuse this RandomGenerator for testing phase
-    'If you want to have more relistic data for HeartRate and BloodPressure, feel free to create one/two more function here. And call in JSON code block
+
+
+
     Function RandomGenerator() As String
 
         Dim temp As Double
@@ -63,11 +68,86 @@ Module Module1
         temp = random.NextDouble() * (40.0 - 37.0) + 37.0                         'patient body temperature generator from 37 to 40 (celsius)
         temp = Math.Round(temp, 1)
         tempSTR = CStr(temp)
-        'Console.WriteLine("body temperature is:" + tempSTR)
         Threading.Thread.Sleep(500)                                               '1 second cycle
         RandomGenerator = tempSTR                                                  'Return as tempSTR 
 
     End Function
+    Function RandomHeartRateGenerator(ByVal age As Integer) As String
+
+        Dim heartRate As Integer
+        Dim heartRateSTR As String
+
+        Dim random As New Random
+
+        If (age < 30) Then
+
+            'for patinet who age below 30 heart rate will generate from 98 to 166 
+            heartRate = random.Next(98, 166)
+
+        ElseIf (age >= 30 And age < 35) Then
+
+
+            'for patinet who age between range 30~35 heart rate will generate from 95 to 162 
+            heartRate = random.Next(95, 162)
+
+        ElseIf (age >= 35 And age < 40) Then
+
+
+            ''for patinet who age between range 35~40 heart rate will generate from 93 to 157
+            heartRate = random.Next(93, 157)
+
+        ElseIf (age >= 40 And age < 45) Then
+
+
+            'for patinet who age between range 40~45 heart rate will generate from 90 to 153 
+            heartRate = random.Next(90, 153)
+
+        ElseIf (age >= 45 And age < 50) Then
+
+
+            'for patinet who age between range 45~50 heart rate will generate from 88 to 149
+            heartRate = random.Next(88, 149)
+
+        ElseIf (age >= 50 And age < 55) Then
+
+
+            'for patinet who age between range 50~55 heart rate will generate from 85 to 145
+            heartRate = random.Next(85, 145)
+
+        ElseIf (age >= 55 And age < 60) Then
+
+
+            'for patinet who age between range 55~60 heart rate will generate from 83 to 140
+            heartRate = random.Next(83, 140)
+
+        ElseIf (age >= 60 And age < 65) Then
+
+
+            'for patinet who age between range 60~65 heart rate will generate from 80 to 136 
+            heartRate = random.Next(80, 136)
+
+        ElseIf (age >= 65 And age < 70) Then
+
+
+            'for patinet who age between range 65~70 heart rate will generate from 78 to 132 
+            heartRate = random.Next(78, 132)
+
+        ElseIf (age >= 70) Then
+
+
+            'for patinet who age above 70 heart rate will generate from 75 to 128
+            heartRate = random.Next(75, 128)
+
+        End If
+
+        heartRateSTR = CStr(heartRate)
+
+        RandomHeartRateGenerator = heartRateSTR
+
+
+    End Function
+
+
 
 
     Sub sensorNode()  'previosuly known as sendData()
@@ -80,13 +160,22 @@ Module Module1
         Dim array(100) As String                                                                      'declare array
         Dim count As Integer = 0                                                                      'counter for array         
 
+        Dim array2(100) As Integer
+
         For index As Integer = 1 To num                                                               'for loop until reach the number user entered
 
             Console.WriteLine("Enter name for patient #" + index.ToString)                           'ask for patient name, start from #1
             array(count) = Console.ReadLine()                                                        'save value to array, start from #0
+
+
+            Console.WriteLine("Enter the age for patient #" + index.ToString)
+            array2(count) = Console.ReadLine()
+
             count += 1
 
         Next index
+
+
 
         'JSON
         Dim count2 As Integer = 0
@@ -105,8 +194,8 @@ Module Module1
                 p = New PatientClass()
                 p.Name = array(count2)                              '2nd counter for JSON, save value to array, start from #0
                 p.BodyTemperature = RandomGenerator()
-                p.HeartRate = RandomGenerator()
-                p.BloodPressure = RandomGenerator()
+                p.HeartRate = RandomHeartRateGenerator(array2(count2))
+
                 patient.Add(p)
 
                 count2 += 1
