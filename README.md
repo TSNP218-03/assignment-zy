@@ -29,10 +29,9 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 
 3.  Run app.js  
     *In case nodejs complaining some modules not found:- 
-![image](https://user-images.githubusercontent.com/53253460/87931033-af7b2600-cabb-11ea-9251-e970b37ee3b0.png)
+![image](https://user-images.githubusercontent.com/53253460/87931033-af7b2600-cabb-11ea-9251-e970b37ee3b0.png) 
     
-    open CMD and insert the code below:
-
+    open CMD and insert the code below:   
     -->npm install redis   
     -->npm install socket.io   
     -->npm install express          
@@ -50,7 +49,6 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 
 6.  Open any browser, type http://127.0.0.1:55555/ (lima 5)
 
-![image](https://user-images.githubusercontent.com/53253460/87932609-5f519300-cabe-11ea-969d-b7f0b621400e.png)
 
 7.  You should be able to see a webpage  The patient will now shown in a graph presentation, each patient has its own graph  
     -->Press F12, Select console tab, to view the patient data in real time  
