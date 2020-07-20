@@ -30,13 +30,18 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 3.  Run app.js  
     *In case nodejs complaining some modules not found:- 
 ![image](https://user-images.githubusercontent.com/53253460/87931033-af7b2600-cabb-11ea-9251-e970b37ee3b0.png)
-     open CMD and insert the code below:
+    
+    open CMD and insert the code below:
+
     -->npm install redis   
     -->npm install socket.io   
     -->npm install express          
     
+
 4.  Run Module1.vb, now the app.js will show client is connected  
-    *In case vb complaining some variable is not defined, install package(s) below using [NugetPackageManager](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio)  
+    *In case vb complaining some variable is not defined, install package(s) below using 
+
+    [NugetPackageManager](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio)  
     [H.Socket.IO](https://github.com/HavenDV/H.Socket.IO)  
     [Json.NET]( https://www.newtonsoft.com/json)  
 
