@@ -85,6 +85,10 @@ By displaying data in this way it can also highlight trends, help us want to mak
 -->Fast query over multi-hop relationships	        
 -->Data visualization and more easier to understand and only key information is presented.      
 
+# Flowchart
+
+![image](https://user-images.githubusercontent.com/53253460/87938498-40a4c980-cac9-11ea-81f1-417703168d0c.png)
+
 
 # Acknowledgement
 
