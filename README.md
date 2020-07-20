@@ -71,6 +71,12 @@ The dashboard will access the JSON (patient information) via API '/data'
 ![image](https://user-images.githubusercontent.com/53253460/87915296-8f8c3800-caa4-11ea-98e5-64239f312327.png)
 ![Uploading image.png…]()
 ![image](https://user-images.githubusercontent.com/53253460/87915543-e4c84980-caa4-11ea-82c2-6a53c67c6a47.png)
+
+
+
+![Uploading image.png…]()
+
+
 # Acknowledgement
 
 LEE ZHEN YU   (Team Lead)  
