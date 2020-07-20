@@ -51,7 +51,7 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 
 
 7.  You should be able to see a webpage  The patient will now shown in a graph presentation, each patient has its own graph  
-    -->Press F12, Select console tab, to view the patient data in real time  
+    -->Press F12, Select 'console' tab, to view debug info  
     Browse http://127.0.0.1:55555/data (lima 5) view the API return value, that is JSON
 ![image](https://user-images.githubusercontent.com/53253460/87932747-9cb62080-cabe-11ea-9c9f-f4a749a75492.png)
 8.  That's it.
