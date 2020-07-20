@@ -44,6 +44,7 @@ Image above adapted and edited from [online](https://kasvith.me/posts/how-we-cre
 5.  Now proceed to send data with sensorNode (insert number of patient to be monitored)
 
 6.  Open any browser, type http://127.0.0.1:55555/ (lima 5)
+
 ![image](https://user-images.githubusercontent.com/53253460/87932609-5f519300-cabe-11ea-969d-b7f0b621400e.png)
 
 7.  You should be able to see a webpage  The patient will now shown in a graph presentation, each patient has its own graph  
